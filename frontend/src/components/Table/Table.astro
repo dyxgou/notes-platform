@@ -1,0 +1,40 @@
+---
+import type { SubjectKind } from "@/types/subjects";
+import Arrow from "@/assets/arrow.svg";
+
+interface Props {
+  course: string;
+  subjectKind: SubjectKind;
+  subject: string;
+  period: number;
+}
+
+const { course, subjectKind, period, subject } = Astro.props;
+
+const PRESCHOOL = "P" as const;
+let courseText = course;
+
+if (course == PRESCHOOL) {
+  courseText = "Pre Escolar";
+}
+---
+
+<div
+  class="w-full h-full rounded-3xl bg-white/40 shadow-lg shadow-neutral-500 backdrop-blur-md"
+>
+  <header class="grid place-items-center w-full border-b-1 border-stone-400">
+    <nav class="table-nav">
+      <a
+        href="/grades"
+        class="transition-[margin,color] duration-300 hover:mx-2 hover:text-indigo-500"
+        >Cursos</a
+      >
+      <Arrow />
+      <a href={`/grades/${course}/`}>Grado {courseText}</a>
+      <Arrow />
+      <a href={`/grades/${course}/${period}/`}>Período {period}</a>
+      <Arrow />
+      <span class="text-indigo-600">{subject}</span>
+    </nav>
+  </header>
+</div>
